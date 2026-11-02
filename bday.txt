@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"] {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            width: 80%;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff6b81;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .cake {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Input Section -->
+    <div class="container" id="input-section">
+        <h1>Enter Your Name</h1>
+        <input type="text" id="username" placeholder="Type your name here..." autocomplete="off">
+        <br>
+        <button onclick="startBirthday()">Celebrate!</button>
+    </div>
+
+    <!-- Birthday Greeting Section -->
+    <div class="container hidden" id="greeting-section">
+        <div class="cake">🎂</div>
+        <h1 id="birthday-message">Happy Birthday!</h1>
+        <p>Wishing you a fantastic day filled with joy and laughter!</p>
+    </div>
+
+    <!-- Background Audio -->
+    <!-- Replace the src URL with your preferred upbeat birthday song link or local file path -->
+    <audio id="birthday-song" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function startBirthday() {
+            const nameInput = document.getElementById("username").value.trim();
+            
+            if (nameInput === "") {
+                alert("Please enter a name first!");
+                return;
+            }
+
+            // Hide input form and show greeting
+            document.getElementById("input-section").classList.add("hidden");
+            document.getElementById("greeting-section").classList.remove("hidden");
+
+            // Update heading with the user's name
+            document.getElementById("birthday-message").innerText = `Happy Birthday, ${nameInput}! 🎉`;
+
+            // Play the song
+            const song = document.getElementById("birthday-song");
+            song.play().catch(error => {
+                console.log("Audio autoplay restricted by browser: ", error);
+            });
+        }
+    </script>
+
+</body>
+</html>
